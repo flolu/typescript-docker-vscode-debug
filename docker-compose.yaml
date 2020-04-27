@@ -1,0 +1,23 @@
+version: "3"
+services:
+  gateway:
+    image: node:lts-alpine
+    working_dir: /
+    volumes:
+      - ./package.json:/package.json
+      - ./tsconfig.json:/tsconfig.json
+      - ./services/gateway:/services/gateway
+      - ./node_modules:/node_modules
+    command: yarn run ts-node-dev services/gateway
+    ports:
+      - 3000:3000
+
+  hello:
+    image: node:lts-alpine
+    working_dir: /
+    volumes:
+      - ./package.json:/package.json
+      - ./tsconfig.json:/tsconfig.json
+      - ./services/hello:/services/hello
+      - ./node_modules:/node_modules
+    command: yarn run ts-node-dev services/hello
